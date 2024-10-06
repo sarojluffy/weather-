@@ -8,6 +8,18 @@ const weather = async (city) => {
     );
 
     console.log(axi);
+    const {
+      coord: { lat, lon },
+      main: { temp, feels_like, temp_max, temp_min, humidity },
+      name,
+      dt,
+      sys: { country, sunrise, sunset },
+      weather,
+      wind: { speed },
+      timezone,
+    } = axi.data;
+
+    return weather;
   } catch (error) {
     if (error.response) {
       console.log(error.response.data.message);
