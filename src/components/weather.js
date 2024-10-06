@@ -8,12 +8,12 @@ const weather = async (city) => {
     );
 
     console.log(axi);
-    const {
+    const { //destrcuturing
       coord: { lat, lon },
       main: { temp, feels_like, temp_max, temp_min, humidity },
       name,
       dt,
-      sys: { country, sunrise, sunset },
+      sys: { country, sunrise, sunset },,
       weather,
       wind: { speed },
       timezone,
