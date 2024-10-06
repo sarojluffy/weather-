@@ -5,11 +5,7 @@ import { FiWind } from "react-icons/fi";
 import { GiSunrise, GiSunset } from "react-icons/gi";
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
 
-import weather from "./weather";
 const TempNDetails = () => {
-  const abc = () => {
-    weather();
-  };
   const details = [
     { Id: 1, Icon: FaThermometerEmpty, Title: "Real Feel", Value: "45°" },
 
@@ -82,10 +78,6 @@ const TempNDetails = () => {
             </>
           );
         })}
-      </div>
-
-      <div>
-        <button onClick={abc}>click me </button>
       </div>
     </>
   );
