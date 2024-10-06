@@ -5,14 +5,10 @@ import { FiWind } from "react-icons/fi";
 import { GiSunrise, GiSunset } from "react-icons/gi";
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
 
-import axios from "axios";
-
+import weather from "./weather";
 const TempNDetails = () => {
-  const abc = async () => {
-    const axi = await axios.fetch(
-      "https://api.openweathermap.org/data/2.5/weather?q=london&appid=4858d66228a473a4255d05de78837da2"
-    );
-    console.log(axi);
+  const abc = () => {
+    weather();
   };
   const details = [
     { Id: 1, Icon: FaThermometerEmpty, Title: "Real Feel", Value: "45°" },
