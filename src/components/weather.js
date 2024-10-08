@@ -7,7 +7,6 @@ const weather = async (city) => {
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${ApiKey}`
     );
 
-    console.log(axi);
     const {
       //destrcuturing
       coord: { lat, lon },
@@ -20,12 +19,30 @@ const weather = async (city) => {
       timezone,
     } = axi.data;
 
-    return weather;
+    return {
+      lat,
+      lon,
+      temp,
+      feels_like,
+      temp_max,
+      temp_min,
+      humidity,
+      name,
+      dt,
+      country,
+      sunrise,
+      sunset,
+      weather,
+      speed,
+      timezone,
+    };
   } catch (error) {
     if (error.response) {
-      console.log(error.response.data.message);
+      return error.response.data.message;
+      //   console.log(error.response.data.message);
     } else {
-      console.log(error.message);
+      return error.message;
+      //   console.log(error.message);
     }
 
     // console.error(error.response?.data.message || error.message);

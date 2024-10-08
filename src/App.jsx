@@ -11,8 +11,6 @@ function App() {
 
         <Inputs />
 
-        <TimeNlocation />
-
         <TempNDetails />
       </div>
     </>
