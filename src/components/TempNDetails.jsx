@@ -5,7 +5,7 @@ import { FiWind } from "react-icons/fi";
 import { GiSunrise, GiSunset } from "react-icons/gi";
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
 
-const TempNDetails = ({ sunrise, sunset }) => {
+const TempNDetails = ({ sunrise, sunset, temp }) => {
   const details = [
     { Id: 1, Icon: FaThermometerEmpty, Title: "Real Feel", Value: "45°" },
 
@@ -46,7 +46,7 @@ const TempNDetails = ({ sunrise, sunset }) => {
         <div>
           <img src="" alt="" className="w-8 h-8"></img>
         </div>
-        <div className="text-3xl"> 34°</div>
+        <div className="text-3xl"> {`${temp}`}</div>
         <div>
           {details.map(({ Icon, Title, Value }) => {
             return (

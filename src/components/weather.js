@@ -4,7 +4,7 @@ const ApiKey = "4858d66228a473a4255d05de78837da2";
 const weather = async (city) => {
   try {
     const axi = await axios.get(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${ApiKey}`
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${ApiKey}&units=metric`
     );
 
     const {
@@ -14,10 +14,12 @@ const weather = async (city) => {
       name,
       dt,
       sys: { country, sunrise, sunset },
-      weather,
+      weather, //
       wind: { speed },
       timezone,
     } = axi.data;
+
+    const { main } = weather[0];
 
     return {
       lat,
@@ -35,6 +37,7 @@ const weather = async (city) => {
       weather,
       speed,
       timezone,
+      main,
     };
   } catch (error) {
     if (error.response) {

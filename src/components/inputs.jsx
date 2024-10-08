@@ -13,6 +13,10 @@ const Inputs = () => {
   const [formatLocal, setFormatloca] = useState(null);
   const [sunrise, setsunrise] = useState(null);
   const [sunset, setsunset] = useState(null);
+  const [temp, settemp] = useState(null);
+  const [cityy, setcityy] = useState(null);
+  const [country, setcountry] = useState(null);
+  const [main, setmain] = useState(null);
   const abc = async (e) => {
     e.preventDefault();
 
@@ -33,12 +37,16 @@ const Inputs = () => {
 
       setFormatloca(formattolocaltime(returnval.dt, returnval.timezone));
       setsunrise(
-        formattolocaltime(returnval.sunrise, returnval.timezone, "hh:mm a")
+        formattolocaltime(returnval.sunrise, returnval.timezone, "hh:mm a") //"hh:mm a" this code will override the format mentioned earlier
       );
       setsunset(
         formattolocaltime(returnval.sunset, returnval.timezone, "hh:mm a")
       );
-      //   console.log(sunrise);
+
+      settemp(returnval.temp.toFixed(0));
+      setcityy(returnval.name);
+      setcountry(returnval.country);
+      setmain(returnval.main);
     }
   }, [returnval]);
 
@@ -67,8 +75,13 @@ const Inputs = () => {
           <p>{formattedtime}</p> */}
         </div>
       </div>
-      <TimeNlocation abcd={formatLocal} sunrise={sunrise} />
-      <TempNDetails sunrise={sunrise} sunset={sunset} />
+      <TimeNlocation
+        abcd={formatLocal}
+        cityy={cityy}
+        country={country}
+        main={main}
+      />
+      <TempNDetails sunrise={sunrise} sunset={sunset} temp={temp} />
     </>
   );
 };
