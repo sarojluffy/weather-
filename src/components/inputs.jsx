@@ -4,13 +4,15 @@ import weather from "./weather";
 import { useEffect, useState } from "react";
 import TimeNlocation from "./time&location";
 import { DateTime } from "luxon";
+import TempNDetails from "./TempNDetails";
 
 const Inputs = () => {
   const [city, setcity] = useState("");
 
   const [returnval, setreturnval] = useState(null);
-  const [timestring, settimestring] = useState(null);
-  const [formattedtime, setformattime] = useState(null);
+  const [formatLocal, setFormatloca] = useState(null);
+  const [sunrise, setsunrise] = useState(null);
+  const [sunset, setsunset] = useState(null);
   const abc = async (e) => {
     e.preventDefault();
 
@@ -20,38 +22,25 @@ const Inputs = () => {
 
   useEffect(() => {
     if (returnval) {
-      console.log(returnval);
-      const date = new Date(returnval.dt * 1000); //the date receives the date object
+      console.log(returnval.dt);
 
-      //   console.log(date);
+      const formattolocaltime = (
+        secs,
+        offset,
+        format = " cccc , dd LLL yyyy' | Local time : 'hh:mm a" //this 3rd parameter has this default format , you can call this formattolocaltime function and then pass another format which will sim-ply overide this format
+      ) =>
+        DateTime.fromSeconds(secs + offset, { zone: "utc" }).toFormat(format);
 
-      settimestring(
-        date.toLocaleDateString("en-US", {
-          weekday: "long", // "Tuesday"
-          day: "numeric", // "14"
-          month: "short", // "May"
-          year: "numeric", // "2024"
-        })
+      setFormatloca(formattolocaltime(returnval.dt, returnval.timezone));
+      setsunrise(
+        formattolocaltime(returnval.sunrise, returnval.timezone, "hh:mm a")
       );
-      setformattime(
-        date.toLocaleTimeString("en-US", {
-          hour: "2-digit",
-          minute: "2-digit",
-          hour12: true, // For 12-hour format with AM/PM
-        })
+      setsunset(
+        formattolocaltime(returnval.sunset, returnval.timezone, "hh:mm a")
       );
+      //   console.log(sunrise);
     }
   }, [returnval]);
-  //   const formattolocaltime = (
-  //     secs,
-  //     offset,
-  //     format = " cccc , dd LLL yyyy' | Local time : 'hh:mm a "
-  //   ) => DateTime.fromSeconds(secs + offset, { zone: "utc" }).toFormat(format);
-
-  //   const formattedlocalocaltime = formattolocaltime(
-  //     returnval.dt,
-  //     returnval.timezone
-  //   );
 
   return (
     <>
@@ -74,12 +63,12 @@ const Inputs = () => {
           <p>|</p>
 
           <button>°F</button>
-          <p>{timestring}</p>
-          <p>{formattedtime}</p>
+          {/* <p>{timestring}</p>
+          <p>{formattedtime}</p> */}
         </div>
       </div>
-      <TimeNlocation />
-      <div></div>
+      <TimeNlocation abcd={formatLocal} sunrise={sunrise} />
+      <TempNDetails sunrise={sunrise} sunset={sunset} />
     </>
   );
 };

@@ -10,8 +10,6 @@ function App() {
         <Topbuttons />
 
         <Inputs />
-
-        <TempNDetails />
       </div>
     </>
   );
