@@ -17,6 +17,7 @@ const Inputs = () => {
   const [cityy, setcityy] = useState(null);
   const [country, setcountry] = useState(null);
   const [main, setmain] = useState(null);
+  const [arr, setarrr] = useState(null);
   const abc = async (e) => {
     e.preventDefault();
 
@@ -26,8 +27,6 @@ const Inputs = () => {
 
   useEffect(() => {
     if (returnval) {
-      console.log(returnval.dt);
-
       const formattolocaltime = (
         secs,
         offset,
@@ -36,14 +35,32 @@ const Inputs = () => {
         DateTime.fromSeconds(secs + offset, { zone: "utc" }).toFormat(format);
 
       setFormatloca(formattolocaltime(returnval.dt, returnval.timezone));
-      setsunrise(
-        formattolocaltime(returnval.sunrise, returnval.timezone, "hh:mm a") //"hh:mm a" this code will override the format mentioned earlier
-      );
-      setsunset(
-        formattolocaltime(returnval.sunset, returnval.timezone, "hh:mm a")
-      );
 
-      settemp(returnval.temp.toFixed(0));
+      setarrr({
+        sunrise: formattolocaltime(
+          returnval.sunrise,
+          returnval.timezone,
+          "hh:mm a"
+        ),
+        sunset: formattolocaltime(
+          returnval.sunset,
+          returnval.timezone,
+          "hh:mm a"
+        ),
+        temp: returnval.temp.toFixed(0),
+        humidity: returnval.humidity,
+        windspeed: returnval.speed.toFixed(),
+        realfeel: returnval.feels_like.toFixed(),
+      });
+
+      // setsunrise(
+      //   formattolocaltime(returnval.sunrise, returnval.timezone, "hh:mm a") //"hh:mm a" this code will override the format mentioned earlier
+      // );
+      // setsunset(
+      //   formattolocaltime(returnval.sunset, returnval.timezone, "hh:mm a")
+      // );
+
+      // settemp(returnval.temp.toFixed(0));
       setcityy(returnval.name);
       setcountry(returnval.country);
       setmain(returnval.main);
@@ -81,7 +98,7 @@ const Inputs = () => {
         country={country}
         main={main}
       />
-      <TempNDetails sunrise={sunrise} sunset={sunset} temp={temp} />
+      <TempNDetails arr={arr} />
     </>
   );
 };
