@@ -19,7 +19,7 @@ const weather = async (city) => {
       timezone,
     } = axi.data;
 
-    const { main } = weather[0];
+    const { main, icon } = weather[0];
 
     return {
       lat,
@@ -38,15 +38,17 @@ const weather = async (city) => {
       speed,
       timezone,
       main,
+      icon,
     };
   } catch (error) {
-    if (error.response) {
-      return error.response.data.message;
-      //   console.log(error.response.data.message);
-    } else {
-      return error.message;
-      //   console.log(error.message);
-    }
+    return error;
+    // if (error.response) {
+    //   return error.response.data.message;
+    //   //   console.log(error.response.data.message);
+    // } else {
+    //   return error.message;
+    //   //   console.log(error.message);
+    // }
 
     // console.error(error.response?.data.message || error.message);
   }

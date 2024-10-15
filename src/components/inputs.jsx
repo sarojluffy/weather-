@@ -7,13 +7,11 @@ import { DateTime } from "luxon";
 import TempNDetails from "./TempNDetails";
 
 const Inputs = () => {
-  const [city, setcity] = useState("");
+  const [city, setcity] = useState(null);
 
   const [returnval, setreturnval] = useState(null);
   const [formatLocal, setFormatloca] = useState(null);
-  const [sunrise, setsunrise] = useState(null);
-  const [sunset, setsunset] = useState(null);
-  const [temp, settemp] = useState(null);
+
   const [cityy, setcityy] = useState(null);
   const [country, setcountry] = useState(null);
   const [main, setmain] = useState(null);
@@ -22,7 +20,15 @@ const Inputs = () => {
     e.preventDefault();
 
     const xyz = await weather(city); // prop in function sent
-    setreturnval(xyz);
+
+    if (xyz.response) {
+      // return error.response.data.message;
+      console.log(xyz.response.data.message);
+    } else if (xyz.message) {
+      // return error.message;
+      console.log(xyz.message);
+    } else setreturnval(xyz);
+    setcity("");
   };
 
   useEffect(() => {
@@ -51,6 +57,7 @@ const Inputs = () => {
         humidity: returnval.humidity,
         windspeed: returnval.speed.toFixed(),
         realfeel: returnval.feels_like.toFixed(),
+        icons: returnval.icon,
       });
 
       // setsunrise(
@@ -74,6 +81,7 @@ const Inputs = () => {
           <form onSubmit={abc}>
             <input
               type="text"
+              value={city}
               className="w-full py-1 px-1 text-black"
               placeholder="search by city ..."
               onChange={(e) => setcity(e.target.value)}

@@ -5,8 +5,8 @@ import { GiSunrise, GiSunset } from "react-icons/gi";
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
 
 const TempNDetails = ({ arr }) => {
-  console.log(arr);
-  const { sunrise, sunset, temp, humidity, windspeed, realfeel } = arr || {};
+  const { sunrise, sunset, temp, humidity, windspeed, realfeel, icons } =
+    arr || {};
 
   const details = [
     {
@@ -35,9 +35,14 @@ const TempNDetails = ({ arr }) => {
     <>
       <div className="flex justify-between items-center mt-5">
         <div>
-          <img src="" alt="" className="w-8 h-8" />
+          <img
+            // src="http://openweathermap.org/img/w/10d.png"
+            src={`http://openweathermap.org/img/w/${icons}.png`}
+            alt=""
+            className="size-16"
+          />
         </div>
-        <div className="text-3xl">{`${temp}°`}</div>
+        <div className="text-3xl">{`${temp}`}</div>
         <div>
           {details.map(({ Icon, Title, Value }) => (
             <div key={Title} className="flex space-x-1 text-sm items-center">
