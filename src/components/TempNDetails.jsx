@@ -46,7 +46,7 @@ const TempNDetails = ({ sunrise, sunset, temp }) => {
         <div>
           <img src="" alt="" className="w-8 h-8"></img>
         </div>
-        <div className="text-3xl"> {`${temp}`}</div>
+        <div className="text-3xl"> {`${temp}°`}</div>
         <div>
           {details.map(({ Icon, Title, Value }) => {
             return (
