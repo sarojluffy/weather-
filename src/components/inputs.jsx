@@ -7,7 +7,7 @@ import { DateTime } from "luxon";
 import TempNDetails from "./TempNDetails";
 
 const Inputs = () => {
-  const [city, setcity] = useState(null);
+  const [city, setcity] = useState("");
 
   const [returnval, setreturnval] = useState(null);
   const [formatLocal, setFormatloca] = useState(null);
